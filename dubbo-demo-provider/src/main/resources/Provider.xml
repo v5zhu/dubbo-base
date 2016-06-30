@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="chop-app"/>
+    <!-- 使用multicast广播注册中心暴露服务地址 -->
+    <dubbo:registry address="${zookeeper.registry.address}"
+            file="/data/dubbo/chop/chop-app-dubbo.cache"/>
+
+    <dubbo:protocol name="dubbo" port="${zookeeper.protocol.port}" serialization="hessian2"/>
+    <dubbo:provider timeout="${zookeeper.provider.timeout}"/>
+    <dubbo:annotation package="com.changhong.publicaccount.impl.facade"/>
+    <!-- use tomcat server -->
+    <dubbo:protocol name="rest" port="${rest.port}" contextpath="api" server="servlet"
+                    extension="com.changhong.open.app.api.impl.extension.TraceInterceptor,
+                    com.changhong.open.app.api.impl.extension.TraceFilter,
+                    com.changhong.open.app.api.impl.extension.ClientTraceFilter,
+                    com.changhong.open.app.api.impl.extension.DynamicTraceBinding,
+                    com.changhong.open.app.api.impl.extension.CustomExceptionMapper,
+                    com.changhong.open.app.api.impl.extension.ValidationExceptionMapper,
+                    com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"/>
+    <!-- 声明需要暴露的服务接口【DUBBO】 -->
+
+    <dubbo:service protocol="dubbo" interface="com.changhong.open.app.api.AppVersionService"
+                   ref="appVersionService"/>
+    <dubbo:service protocol="dubbo" interface="com.changhong.open.app.api.AppService"
+                   ref="appService"/>
+    <dubbo:service protocol="dubbo" interface="com.changhong.open.app.api.AppDownloadRecordService"
+                   ref="appDownloadRecordService"/>
+    <dubbo:service protocol="dubbo" interface="com.changhong.open.app.api.AppDownloadTrendService"
+                   ref="appDownloadTrendService"/>
+
+    <!-- 声明需要暴露的服务接口【REST】-->
+    <dubbo:service protocol="rest" interface="com.changhong.open.app.api.facade.AppVersionRestService" validation="true"
+                      ref="appVersionRestService" />
+    <dubbo:service protocol="rest" interface="com.changhong.open.app.api.facade.AppRestService" validation="true"
+                   ref="appRestService"/>
+    <dubbo:service protocol="rest" interface="com.changhong.open.app.api.facade.AppDownloadRecordRestService" validation="true"
+                   ref="appDownloadRecordRestService"/>
+    <dubbo:service protocol="rest" interface="com.changhong.open.app.api.facade.AppDownloadTrendRestService" validation="true"
+                   ref="appDownloadTrendRestService"/>
+
+
+    <!--Spring bean 配置-->
+    <bean id="appVersionService"
+          class="com.changhong.open.app.api.impl.AppVersionServiceImpl"/>
+    <bean id="appVersionRestService"
+          class="com.changhong.open.app.api.impl.facade.AppVersionRestServiceImpl"/>
+    <bean id="appService"
+          class="com.changhong.open.app.api.impl.AppServiceImpl"/>
+    <bean id="appRestService"
+          class="com.changhong.open.app.api.impl.facade.AppRestServiceImpl"/>
+    <bean id="appDownloadRecordService"
+          class="com.changhong.open.app.api.impl.AppDownloadRecordServiceImpl"/>
+    <bean id="appDownloadRecordRestService"
+          class="com.changhong.open.app.api.impl.facade.AppDownloadRecordRestServiceImpl"/>
+
+    <bean id="appDownloadTrendService"
+          class="com.changhong.open.app.api.impl.AppDownloadTrendServiceImpl"/>
+    <bean id="appDownloadTrendRestService"
+          class="com.changhong.open.app.api.impl.facade.AppDownloadTrendRestServiceImpl"/>
+</beans>
+
