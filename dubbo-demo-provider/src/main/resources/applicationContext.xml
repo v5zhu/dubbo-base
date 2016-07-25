@@ -3,12 +3,10 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd"
        default-lazy-init="true">
 
     <description>Spring公共配置</description>
@@ -17,47 +15,47 @@
     <context:annotation-config/>
 
     <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-    <context:component-scan base-package="com.changhong.open.app"/>
+    <context:component-scan base-package="com.v5zhu.dubbo"/>
     <!-- Jpa Entity Manager 配置 -->
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
-        <property name="packagesToScan" value="com.changhong.open.app.po.entity"/>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
-                </prop>
-                <prop key="net.sf.ehcache.configurationResourceName">cache/ehcache-hibernate.xml</prop>
-                <!-- 命名规则 My_NAME->MyName -->
-                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-            </props>
-        </property>
-    </bean>
+    <!--<bean id="entityManagerFactory"-->
+          <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>-->
+        <!--<property name="packagesToScan" value="com.changhong.open.app.po.entity"/>-->
+        <!--<property name="jpaProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory-->
+                <!--</prop>-->
+                <!--<prop key="net.sf.ehcache.configurationResourceName">cache/ehcache-hibernate.xml</prop>-->
+                <!--&lt;!&ndash; 命名规则 My_NAME->MyName &ndash;&gt;-->
+                <!--<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 
-    <bean id="hibernateJpaVendorAdapter"
-          class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <property name="databasePlatform">
-            <bean factory-method="getDialect"
-                  class="org.springside.modules.persistence.Hibernates">
-                <constructor-arg ref="dataSource"/>
-            </bean>
-        </property>
-        <property name="generateDdl" value="true"/>
-        <!--<property name="showSql" value="true"/>-->
-    </bean>
+    <!--<bean id="hibernateJpaVendorAdapter"-->
+          <!--class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">-->
+        <!--<property name="databasePlatform">-->
+            <!--<bean factory-method="getDialect"-->
+                  <!--class="org.springside.modules.persistence.Hibernates">-->
+                <!--<constructor-arg ref="dataSource"/>-->
+            <!--</bean>-->
+        <!--</property>-->
+        <!--<property name="generateDdl" value="true"/>-->
+        <!--&lt;!&ndash;<property name="showSql" value="true"/>&ndash;&gt;-->
+    <!--</bean>-->
 
-    <bean id="jedisConnectionFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:hostName="${redis.ip}" p:port="${redis.port}" p:usePool="true"/>
+    <!--<bean id="jedisConnectionFactory"-->
+          <!--class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"-->
+          <!--p:hostName="${redis.ip}" p:port="${redis.port}" p:usePool="true"/>-->
 
-    <bean id="jdbcTemplate"
-          class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean id="jdbcTemplate"-->
+          <!--class="org.springframework.jdbc.core.JdbcTemplate">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
-    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
-          p:connectionFactory-ref="jedisConnectionFactory"/>
+    <!--<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"-->
+          <!--p:connectionFactory-ref="jedisConnectionFactory"/>-->
     <!--<property appName="hostName" value="${redis.host}"/> -->
     <!--<property appName="port" value="${redis.port}"/> -->
     <!-- <property appName="password" value="${redis.password}" /> -->
@@ -71,87 +69,21 @@
     <!--password="" mongo-ref="mongo"/> -->
 
     <!-- Spring Data Jpa配置 -->
-    <jpa:repositories base-package="com.changhong.open.app.dao.repository"
-                      transaction-manager-ref="transactionManager"
-                      entity-manager-factory-ref="entityManagerFactory"/>
-    <!-- Jpa 事务配置 -->
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
+    <!--<jpa:repositories base-package="com.changhong.open.app.dao.repository"-->
+                      <!--transaction-manager-ref="transactionManager"-->
+                      <!--entity-manager-factory-ref="entityManagerFactory"/>-->
+    <!--&lt;!&ndash; Jpa 事务配置 &ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+        <!--<property name="entityManagerFactory" ref="entityManagerFactory"/>-->
+    <!--</bean>-->
 
     <!-- 使用annotation定义事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager"
-                          proxy-target-class="true"/>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"-->
+                          <!--proxy-target-class="true"/>-->
 
     <!-- JSR303 Validator定义 -->
     <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
-
-
-    <!-- production环境 -->
-    <beans profile="production">
-        <context:property-placeholder
-                ignore-unresolvable="true" location="classpath*:/application.properties"/>
-
-
-        <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-              init-method="init" destroy-method="close">
-            <property name="driverClassName" value="${jdbc.driver}"/>
-            <property name="url" value="${jdbc.url}"/>
-            <property name="username" value="${jdbc.username}"/>
-            <property name="password" value="${jdbc.password}"/>
-
-            <!-- 初始化连接大小 -->
-            <property name="initialSize" value="5"/>
-            <!-- 连接池最大使用连接数量 -->
-            <property name="maxActive" value="50"/>
-            <!-- 连接池最大空闲 该参数已废弃 -->
-            <!-- property name="maxIdle" value="20" / -->
-            <!-- 连接池最小空闲 -->
-            <property name="minIdle" value="1"/>
-            <!-- 获取连接最大等待时间 -->
-            <property name="maxWait" value="60000"/>
-
-            <property name="poolPreparedStatements" value="true"/>
-            <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
-
-            <property name="validationQuery" value="${validationQuery}"/>
-            <property name="testOnBorrow" value="false"/>
-            <property name="testOnReturn" value="false"/>
-            <property name="testWhileIdle" value="true"/>
-
-            <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-            <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-            <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-            <property name="minEvictableIdleTimeMillis" value="300000"/>
-
-            <!-- 打开removeAbandoned功能 -->
-            <property name="removeAbandoned" value="true"/>
-            <!-- 1800秒，也就是30分钟 -->
-            <property name="removeAbandonedTimeout" value="1800"/>
-            <!-- 关闭abanded连接时输出错误日志 -->
-            <property name="logAbandoned" value="true"/>
-
-            <property name="timeBetweenLogStatsMillis" value="300000"/>
-
-            <!-- 监控数据库 -->
-            <!-- <property name="filters" value="stat" /> -->
-            <property name="filters" value="stat,wall,slf4j,log4j"/>
-            <!--<property name="filters" value="wall,stat" />-->
-            <property name="proxyFilters">
-                <list>
-                    <ref bean="logFilter"/>
-                </list>
-            </property>
-        </bean>
-        <bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4jFilter">
-            <property name="statementExecutableSqlLogEnable" value="false"/>
-
-            <property name="statementLoggerName" value="sqlLogger"/>
-            <!--<property name="resultSetLogEnabled" value="false" />-->
-        </bean>
-
-    </beans>
 
 
     <!-- local development环境 -->
@@ -159,69 +91,6 @@
         <context:property-placeholder
                 ignore-resource-not-found="true"
                 location="classpath*:/application.development.properties"/>
-
-        <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-              init-method="init" destroy-method="close">
-            <property name="driverClassName" value="${jdbc.driver}"/>
-            <property name="url" value="${jdbc.url}"/>
-            <property name="username" value="${jdbc.username}"/>
-            <property name="password" value="${jdbc.password}"/>
-
-            <!-- 初始化连接大小 -->
-            <property name="initialSize" value="5"/>
-            <!-- 连接池最大使用连接数量 -->
-            <property name="maxActive" value="50"/>
-            <!-- 连接池最大空闲 该参数已废弃 -->
-            <!-- property name="maxIdle" value="20" / -->
-            <!-- 连接池最小空闲 -->
-            <property name="minIdle" value="1"/>
-            <!-- 获取连接最大等待时间 -->
-            <property name="maxWait" value="60000"/>
-
-            <property name="poolPreparedStatements" value="true"/>
-            <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
-
-            <property name="validationQuery" value="${validationQuery}"/>
-            <property name="testOnBorrow" value="false"/>
-            <property name="testOnReturn" value="false"/>
-            <property name="testWhileIdle" value="true"/>
-
-            <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-            <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-            <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-            <property name="minEvictableIdleTimeMillis" value="300000"/>
-
-            <!-- 打开removeAbandoned功能 -->
-            <property name="removeAbandoned" value="true"/>
-            <!-- 1800秒，也就是30分钟 -->
-            <property name="removeAbandonedTimeout" value="1800"/>
-            <!-- 关闭abanded连接时输出错误日志 -->
-            <property name="logAbandoned" value="true"/>
-
-            <property name="timeBetweenLogStatsMillis" value="300000"/>
-
-            <!-- 监控数据库 -->
-            <!-- <property name="filters" value="stat" /> -->
-            <property name="filters" value="stat,wall,slf4j,log4j"/>
-            <!--<property name="filters" value="wall,stat" />-->
-            <property name="proxyFilters">
-                <list>
-                    <ref bean="logFilter"/>
-                </list>
-            </property>
-        </bean>
-        <bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4jFilter">
-            <property name="statementExecutableSqlLogEnable" value="false"/>
-
-            <property name="statementLoggerName" value="sqlLogger"/>
-            <!--<property name="resultSetLogEnabled" value="false" />-->
-        </bean>
-    </beans>
-
-    <!-- unit test环境 -->
-    <beans profile="test">
-        <context:property-placeholder
-                ignore-resource-not-found="true" location="classpath*:/application.test.properties"/>
 
         <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
               init-method="init" destroy-method="close">

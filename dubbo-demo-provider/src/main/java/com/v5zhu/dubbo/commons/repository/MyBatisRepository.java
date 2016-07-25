@@ -1,4 +1,4 @@
-package com.pax.dubbo.commons.repository;
+package com.v5zhu.dubbo.commons.repository;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pax.dubbo.extension;
+package com.v5zhu.dubbo.extension;
 
 import com.alibaba.dubbo.rpc.RpcContext;
 
