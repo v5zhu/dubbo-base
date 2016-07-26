@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>dubbo-demo</artifactId>
+        <artifactId>dubbo-base</artifactId>
         <groupId>com.v5zhu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
   <groupId>com.v5zhu</groupId>
-  <artifactId>dubbo-demo-api</artifactId>
+  <artifactId>dubbo-base-api</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>dubbo-demo-api Maven Webapp</name>
@@ -79,6 +79,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>dubbo-demo-api</finalName>
+    <finalName>dubbo-base-api</finalName>
   </build>
 </project>

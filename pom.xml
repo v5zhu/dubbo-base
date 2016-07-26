@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.v5zhu</groupId>
-    <artifactId>dubbo-demo</artifactId>
+    <artifactId>dubbo-base</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>dubbo-demo-api</module>
-        <module>dubbo-demo-provider</module>
+        <module>dubbo-base-api</module>
+        <module>dubbo-base-provider</module>
     </modules>
     <properties>
         <!-- 主要依赖库的版本定义 -->
