@@ -17,7 +17,7 @@
     <dubbo:provider timeout="${zookeeper.provider.timeout}"/>
     <dubbo:annotation package="com.v5zhu.dubbo.api.impl.facade"/>
     <!-- use tomcat server -->
-    <dubbo:protocol name="rest" port="${rest.port}" contextpath="api" server="servlet"
+    <dubbo:protocol name="rest" port="${rest.port}" contextpath="api" server="tomcat"
                     extension="com.v5zhu.dubbo.extension.TraceInterceptor,
                     com.v5zhu.dubbo.extension.TraceFilter,
                     com.v5zhu.dubbo.extension.ClientTraceFilter,

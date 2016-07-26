@@ -36,10 +36,11 @@
         <jackson-annotations.version>2.4.2</jackson-annotations.version>
         <validation.version>1.1.0.Final</validation.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
-        <jaxrs-api.version>3.0.7.Final</jaxrs-api.version>
+        <jaxrs-api.version>3.0.11.Final</jaxrs-api.version>
         <aspectj.version>1.8.5</aspectj.version>
         <jackson-mapper-asl.version>1.9.9</jackson-mapper-asl.version>
         <jackson-module-jaxb.version>2.4.0</jackson-module-jaxb.version>
+        <resteasy-jaxb.version>3.0.18.Final</resteasy-jaxb.version>
 
         <!--core-start-->
         <mybatis.version>3.2.8</mybatis.version>
@@ -88,6 +89,7 @@
 
         <!-- rest -->
         <resteasy.version>3.0.11.Final</resteasy.version>
+        <resteasy-client.version>3.0.18.Final</resteasy-client.version>
         <jboss-servlet-api_3.1_spec>1.0.0.Final</jboss-servlet-api_3.1_spec>
 
 
@@ -119,6 +121,18 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.resteasy</groupId>-->
+                <!--<artifactId>resteasy-jaxrs</artifactId>-->
+                <!--<version>${jaxrs-api.version}</version>-->
+            <!--</dependency>-->
+            <!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-client -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>${resteasy-client.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
@@ -232,6 +246,20 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxb-provider -->
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.resteasy</groupId>-->
+                <!--<artifactId>resteasy-jaxb-provider</artifactId>-->
+                <!--<version>${resteasy-jaxb.version}</version>-->
+            <!--</dependency>-->
+            <!--rest接口返回实体类自动转换成json格式-->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jackson-provider</artifactId>
+                <version>${resteasy-jaxb.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
