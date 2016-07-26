@@ -10,7 +10,7 @@
   <artifactId>dubbo-base-api</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>dubbo-demo-api Maven Webapp</name>
+  <name>dubbo-base-api Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
